@@ -10,5 +10,20 @@
 </head>
 <body>
   <app-root></app-root>
+  <script type="text/javascript">
+    /* Cuma buat testing async load css styles dkk */
+    var asynCSS = document.createElement('link');
+    asynCSS.rel = 'stylesheet';
+    asynCSS.href = 'https://fonts.googleapis.com/icon?family=Material+Icons';
+    asynCSS.type = 'text/css';
+    var deferCSS = document.getElementsByTagName('link')[0];
+    deferCSS.parentNode.insertBefore(asynCSS, deferCSS);
+  </script>
+  <noscript>
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/icon?family=Material+Icons"/>
+    <div>
+      <h1>Silahkan aktifkan dukungan browser untuk menjalankan JavaScript di perangkat anda</h1>
+    </div>
+  </noscript>
 </body>
 </html>

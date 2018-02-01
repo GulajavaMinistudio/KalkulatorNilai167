@@ -1,0 +1,29 @@
+import { Injectable } from '@angular/core';
+
+@Injectable()
+export class AuthBrowserTipeService {
+
+  isBrowserSupport = false;
+  stringRedirectUrl: string;
+
+  constructor() {
+  }
+
+  checkBrowserDetection() {
+
+    this.isBrowserSupport = this.isBrowserSupportBener();
+  }
+
+  isBrowserSupportBener(): boolean {
+
+    let isBrowserOke = false;
+    console.log(window.navigator.userAgent);
+
+    const isChromeChromium = /chrome\s|chromium\/|chrome\//i.test(window.navigator.userAgent);
+    const isBlinkEngineOpera = /blink\s|opr\/|opera\//i.test(window.navigator.userAgent);
+    if (isChromeChromium || isBlinkEngineOpera) {
+      isBrowserOke = true;
+    }
+    return isBrowserOke;
+  }
+}

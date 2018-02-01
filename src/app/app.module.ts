@@ -3,16 +3,21 @@ import { NgModule } from '@angular/core';
 
 
 import { AppComponent } from './app.component';
+import { ChromeDownloadGuardComponent } from './chrome-download-guard/chrome-download-guard.component';
+import { AuthBrowserTipeService } from './app-routings/auth-browser-tipe.service';
 
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    ChromeDownloadGuardComponent
   ],
   imports: [
     BrowserModule
   ],
-  providers: [],
+  providers: [
+    AuthBrowserTipeService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

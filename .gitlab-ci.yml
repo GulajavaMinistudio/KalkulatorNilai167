@@ -1,0 +1,49 @@
+image: node:8
+
+before_script:
+#  - apt-get --quiet update --yes
+#  - apt-get --quiet install --yes wget tar unzip lib32stdc++6 lib32z1
+
+#  install node js
+#  - apt-get --quiet install -y build-essential
+#  - curl -sL https://deb.nodesource.com/setup_8.x | bash -
+#  - apt --quiet install -y nodejs
+#  - apt-get --quiet update --yes
+#  - npm install -g semver
+#  - npm i -g npm
+#  - npm install -g @angular/cli@latest
+  - curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
+  - echo --quiet -y "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list
+  - apt-get update && apt-get install yarn
+  - yarn global add @angular/cli@latest
+  - yarn global add gulp
+  - yarn add semantic-ui
+  - cd semantic/
+  - gulp build
+  - cd ..
+
+stages:
+  - test
+  - deploy
+
+#deploy debug
+test:
+  stage: test
+  script:
+#    - npm install
+    - yarn install
+    - ng build
+  artifacts:
+    paths:
+    - dist/
+
+#deploy build production
+deploy:
+  stage: deploy
+  script:
+#    - npm install
+    - yarn install
+    - ng build --prod --aot --build-optimizer
+  artifacts:
+    paths:
+    - dist/
