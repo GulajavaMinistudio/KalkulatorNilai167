@@ -38,5 +38,5 @@ class SingletonDataNilai {
 }
 
 const singletonInstanceDataNilai = new SingletonDataNilai();
-Object.freeze(singletonInstanceDataNilai);
+// Object.freeze(singletonInstanceDataNilai);
 export { singletonInstanceDataNilai };

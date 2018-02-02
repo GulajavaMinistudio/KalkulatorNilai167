@@ -6,17 +6,15 @@ import { ChromeDownloadGuardComponent } from '../chrome-download-guard/chrome-do
 
 const appRoutingRoot: Routes = [
   {path: '', redirectTo: 'kalkulator-nilai', pathMatch: 'full'},
-  {path: '**', redirectTo: 'kalkulator-nilai'},
   {
-    path: 'kalkulator-nilai', loadChildren: 'app/kalkulasi-nilai/kalkulasi-nilai.module#KalkulasiNilaiModule',
-    canLoad: [ChromeBrowserGuardGuard]
-  },
-  {
-    path: 'setelan-kalkulator', loadChildren: 'app/setelan-kalkulasi/setelan-kalkulasi.module#SetelanKalkulasiModule',
+    path: '', loadChildren: 'app/kalkulasi-nilai/kalkulasi-nilai.module#KalkulasiNilaiModule',
     canLoad: [ChromeBrowserGuardGuard]
   },
   {
     path: 'gunakan-chrome-dulu', component: ChromeDownloadGuardComponent
+  },
+  {
+    path: '**', redirectTo: 'kalkulator-nilai'
   }
 ];
 

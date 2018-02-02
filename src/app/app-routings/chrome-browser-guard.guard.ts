@@ -29,8 +29,19 @@ export class ChromeBrowserGuardGuard implements CanActivate, CanActivateChild, C
    */
   canLoad(route: Route): Observable<boolean> | Promise<boolean> | boolean {
 
+    console.log('auth guard jalan');
     const urlBrowser = `/${route.path}`;
-    return this.cekBrowserChrome(urlBrowser);
+    const isBrowserSupport = this.cekBrowserChrome(urlBrowser);
+
+    if (isBrowserSupport) {
+      this.router.navigate([urlBrowser]);
+      return true;
+    } else {
+      // Navigasi ke halaman untuk download browser Google Chrome
+      console.log('guard bukan chrome');
+      this.router.navigate(['/gunakan-chrome-dulu']);
+      return true;
+    }
   }
 
   cekBrowserChrome(stringurl: string): boolean {
@@ -39,13 +50,11 @@ export class ChromeBrowserGuardGuard implements CanActivate, CanActivateChild, C
 
     if (this.authBrowserService.isBrowserSupport) {
       return true;
+    } else {
+      // Store the attempted URL for redirecting
+      this.authBrowserService.stringRedirectUrl = stringurl;
+      console.log('browser guard jalan, is chrome, ' + this.authBrowserService.isBrowserSupport);
+      return false;
     }
-
-    // Store the attempted URL for redirecting
-    this.authBrowserService.stringRedirectUrl = stringurl;
-
-    // Navigasi ke halaman untuk download browser Google Chrome
-    // this.router.navigate(['/login']);
-    return false;
   }
 }

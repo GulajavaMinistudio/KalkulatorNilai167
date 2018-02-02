@@ -1,24 +1,25 @@
-<!--The content below is only a placeholder and can be replaced.-->
-<div style="text-align:center">
-  <h1>
-    Welcome to {{ title }}!
-  </h1>
-  <img width="180" alt="Angular Logo" src="assets/chrome_default.png">
-</div>
-<div style="text-align:center">
-<h2>Silahkan download browser Google Chrome melalui salah satu tautan di bawah ini: </h2>
-  <ul class="ui list">
-    <div class="item">
-      <h2>
-        <a target="_blank" rel="noopener" href="https://www.google.com/chrome/">Google Chrome Desktop
-        </a>
-      </h2>
+<body class="body-background">
+
+<!-- header bar -->
+<div class="ui teal fixed inverted menu">
+  <div class="ui container">
+    <a href="#" class="header item">
+      <img class="logo" src="./assets/calculator-flat.png">
+    </a>
+    <a href="#" class="item">Kalkulator Nilai</a>
+    <div class="ui right simple dropdown item">
+      Menu
+      <i class="dropdown icon"></i>
+      <div class="menu">
+        <a class="item" routerLink="/setelan-kalkulator">Setelan</a>
+        <a class="item" href="#">Tentang Aplikasi</a>
+      </div>
     </div>
-    <div class="item">
-      <h2>
-        <a target="_blank" rel="noopener" href="https://play.google.com/store/apps/details?id=com.android.chrome">Google
-        Chrome Android</a>
-      </h2>
-    </div>
-  </ul>
+  </div>
 </div>
+
+<!-- router navigation-->
+<div class="nav-top-routeroutlet">
+  <router-outlet></router-outlet>
+</div>
+</body>

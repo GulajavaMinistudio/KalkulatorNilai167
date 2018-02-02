@@ -4,6 +4,7 @@ import { KalkulatorNilaiComponent } from './kalkulator-nilai/kalkulator-nilai.co
 import { FormsModule } from '@angular/forms';
 import { KalkulasiNilaiService } from './kalkulasi-nilai.service';
 import { RouteKalkulatorNilaiModule } from './route-kalkulator-nilai/route-kalkulator-nilai.module';
+import { KalkulasiHomepageComponent } from './kalkulasi-homepage.component';
 
 @NgModule({
   imports: [
@@ -12,7 +13,8 @@ import { RouteKalkulatorNilaiModule } from './route-kalkulator-nilai/route-kalku
     RouteKalkulatorNilaiModule
   ],
   declarations: [
-    KalkulatorNilaiComponent
+    KalkulatorNilaiComponent,
+    KalkulasiHomepageComponent
   ],
   providers: [
     KalkulasiNilaiService
