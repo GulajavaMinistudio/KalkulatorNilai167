@@ -35,26 +35,23 @@ export class ChromeBrowserGuardGuard implements CanActivate, CanActivateChild, C
 
     if (isBrowserSupport) {
       this.router.navigate([urlBrowser]);
-      return true;
     } else {
       // Navigasi ke halaman untuk download browser Google Chrome
-      console.log('guard bukan chrome');
-      this.router.navigate(['/gunakan-chrome-dulu']);
-      return true;
+      this.router.navigate(['/tentang-aplikasi/lebih-lancar-pake-chrome']);
     }
+    return true;
   }
 
   cekBrowserChrome(stringurl: string): boolean {
 
     this.authBrowserService.checkBrowserDetection();
 
-    if (this.authBrowserService.isBrowserSupport) {
-      return true;
-    } else {
+    if (!this.authBrowserService.isBrowserSupport) {
       // Store the attempted URL for redirecting
       this.authBrowserService.stringRedirectUrl = stringurl;
       console.log('browser guard jalan, is chrome, ' + this.authBrowserService.isBrowserSupport);
-      return false;
+      this.router.navigate(['/tentang-aplikasi/lebih-lancar-pake-chrome']);
     }
+    return true;
   }
 }

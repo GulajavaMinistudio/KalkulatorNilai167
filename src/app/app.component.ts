@@ -10,7 +10,6 @@ import { StateCommunicationComponentsService } from './shareds-module/busdata/st
 })
 export class AppComponent implements OnInit, OnDestroy {
 
-
   subscriptions: Subscription;
 
   constructor(private initAwalService: DataNilaiPenghitungService,
