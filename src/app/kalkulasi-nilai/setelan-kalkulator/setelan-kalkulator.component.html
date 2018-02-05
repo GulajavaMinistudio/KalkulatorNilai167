@@ -1,3 +1,101 @@
-<div>
-  Hello World
+<div class="ui container">
+  <br>
+  <div class="ui one stackable cards">
+
+    <div class="card">
+
+      <div class="content">
+        <div class="header">Setelan Kalkulator Nilai</div>
+      </div>
+      <div class="content">
+
+        <form class="ui form">
+
+          <!-- nilai tugas  default 20 %-->
+          <div class="field">
+            <label for="input_tugas">Persentase Nilai Tugas</label>
+            <input id="input_tugas" type="text" name="nilai_tugas" [(ngModel)]="nilaiTugas">
+          </div>
+
+          <div class="ui negative message" *ngIf="!isNilaiTugasValid">
+            <i class="close icon" (click)="clickCloseDialog()"></i>
+            <p>Silahkan isi persentase nilai tugas dengan benar</p>
+          </div>
+
+          <!-- nilai uts default 35 %-->
+          <div class="field">
+            <label for="input_nilai_uts">Persentase Nilai UTS</label>
+            <input id="input_nilai_uts" type="text" name="nilai_uts" [(ngModel)]="nilaiUTS">
+          </div>
+
+          <div class="ui negative message" *ngIf="!isNilaiUTSValid">
+            <i class="close icon" (click)="clickCloseDialog()"></i>
+            <p>Silahkan isi persentase nilai Ujian Tengah Semester dengan benar</p>
+          </div>
+
+          <!-- nilai uas default 45 % -->
+          <div class="field">
+            <label for="input_nilai_uas">Persentase Nilai UAS</label>
+            <input id="input_nilai_uas" type="text" name="nilai_uas" [(ngModel)]="nilaiUAS">
+          </div>
+
+          <div class="ui negative message" *ngIf="!isNilaiUASValid">
+            <i class="close icon" (click)="clickCloseDialog()"></i>
+            <p>Silahkan isi persentase nilai Ujian Akhir Semester dengan benar</p>
+          </div>
+
+          <!-- nilai batas bawah -->
+          <!-- batas bawah nilai A -->
+          <div class="field">
+            <label for="input_batasbawah_nilaiA"></label>
+            <input id="input_batasbawah_nilaiA" type="text" name = "batasbawah_A">
+          </div>
+
+          <!-- batas bawah nilai B -->
+
+          <!-- batas bawah nilai C -->
+
+          <!-- batas bawah nilai D -->
+
+
+
+          <!--nilai akhir-->
+          <div class="field">
+            <label for="disabled_nilai_akhir">Nilai Akhir</label>
+            <input disabled value="I am not editable" id="disabled_nilai_akhir" type="text" [(ngModel)]="nilaiAkhir"
+                   name="nilai_akhir" class="black_bold_result">
+          </div>
+
+          <!-- nilai huruf -->
+          <div class="field">
+            <label for="disabled_nilai_huruf">Nilai Huruf</label>
+            <input disabled value="belum tersedia" id="disabled_nilai_huruf" type="text" [(ngModel)]="nilaiHuruf"
+                   name="nilai_huruf" class="black_bold_result">
+          </div>
+
+          <!-- nilai predikat -->
+          <div class="field col">
+            <label for="disabled_nilai_predikat">Predikat Nilai</label>
+            <input disabled value="belum tersedia" id="disabled_nilai_predikat" type="text"
+                   [(ngModel)]="nilaiPredikatKategori" name="nilai_predikat" class="black_bold_result">
+          </div>
+
+          <div class="ui negative message" *ngIf="!isInputDataOk">
+            <i class="close icon" (click)="clickCloseDialog()"></i>
+            <p>{{pesanInputDataNotValid}}</p>
+          </div>
+
+        </form>
+      </div>
+
+      <!-- tombol -->
+      <div class="extra content">
+        <div class="ui right floated" style="float: right;">
+          <button type="submit" class="ui blue button">Simpan</button>
+          <button type="submit" class="ui red button">Batal</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
 </div>

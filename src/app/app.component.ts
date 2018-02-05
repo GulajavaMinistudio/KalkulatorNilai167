@@ -52,7 +52,7 @@ export class AppComponent implements OnInit, OnDestroy {
     // cek status data awal pengali tersedia
     this.initAwalService.checkNilaiPengaliTersedia()
       .then(
-        (isDataTersedia) => {
+        (isDataTersedia: boolean) => {
           if (isDataTersedia) {
             this.getDataAwalPengaliLocalStorage();
           } else {
@@ -69,12 +69,12 @@ export class AppComponent implements OnInit, OnDestroy {
     // cek status data awal predikat nilai batas bawah
     this.initAwalService.checkDataBatasBawahNilaiTersedia()
       .then(
-        (isTersedia) => {
+        (isTersedia: boolean) => {
 
           if (isTersedia) {
-            this.getDataAwalPengaliLocalStorage();
+            this.getDataBatasBawahNilaiLocalStorage();
           } else {
-            this.initDataAwalPengaliLocalStorage();
+            this.initDataAwalBatasBawahNilai();
           }
         }
       )

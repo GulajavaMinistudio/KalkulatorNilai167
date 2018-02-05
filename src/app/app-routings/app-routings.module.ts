@@ -6,7 +6,6 @@ import { ChromeDownloadGuardComponent } from '../tentang-app/chrome-download-gua
 import { TentangAppModule } from '../tentang-app/tentang-app.module';
 
 const appRoutingRoot: Routes = [
-  {path: '', redirectTo: 'hitung-nilai', pathMatch: 'full'},
   {
     path: 'hitung-nilai', loadChildren: 'app/kalkulasi-nilai/kalkulasi-nilai.module#KalkulasiNilaiModule',
     canLoad: [ChromeBrowserGuardGuard]
@@ -15,7 +14,10 @@ const appRoutingRoot: Routes = [
     path: 'tentang-aplikasi', loadChildren: 'app/tentang-app/tentang-app.module#TentangAppModule'
   },
   {
-    path: '**', redirectTo: 'kalkulator-nilai'
+    path: '', redirectTo: 'hitung-nilai', pathMatch: 'full'
+  },
+  {
+    path: '**', redirectTo: 'hitung-nilai'
   }
 ];
 

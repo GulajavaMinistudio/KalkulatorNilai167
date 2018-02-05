@@ -4,16 +4,18 @@ import { FormsModule } from '@angular/forms';
 import { ChromeDownloadGuardComponent } from './chrome-download-guard/chrome-download-guard.component';
 import { TentangappHomeComponent } from './tentangapp-home.component';
 import { TentangAppAboutComponent } from './tentang-app-about/tentang-app-about.component';
+import { RoutingTentangAppModule } from './routing-tentang-app/routing-tentang-app.module';
 
 @NgModule({
   imports: [
     CommonModule,
-    FormsModule
+    FormsModule,
+    RoutingTentangAppModule
   ],
   declarations: [
     ChromeDownloadGuardComponent,
-    TentangappHomeComponent,
-    TentangAppAboutComponent
+    TentangAppAboutComponent,
+    TentangappHomeComponent
   ]
 })
 export class TentangAppModule { }

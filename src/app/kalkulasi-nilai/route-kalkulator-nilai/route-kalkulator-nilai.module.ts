@@ -17,7 +17,7 @@ const kalkulatorRoutes: Routes = [
         canActivateChild: [ChromeBrowserGuardGuard],
         children: [
           {path: 'kalkulator-nilai', component: KalkulatorNilaiComponent},
-          {path: 'setelan_kalkulator', component: SetelanKalkulatorComponent},
+          {path: 'setelan-kalkulator', component: SetelanKalkulatorComponent},
           {path: '', redirectTo: 'kalkulator-nilai'}
         ]
       }

@@ -17,17 +17,6 @@ class SingletonDataNilai {
   public stringBatasNilaiC = '0';
   public stringBatasNilaiD = '0';
 
-  // data nilai masukan dan hasil hitungan
-  public stringNilaiTugas = '0';
-  public stringNilaiUTS = '0';
-  public stringNilaiUAS = '0';
-
-  public numberNilaiTugas = 0;
-  public numberNilaiUTS = 0;
-  public numberNilaiUAS = 0;
-  public numberNilaiAkhir = 0;
-
-
   constructor() {
     if (!SingletonDataNilai.instances) {
       SingletonDataNilai.instances = this;

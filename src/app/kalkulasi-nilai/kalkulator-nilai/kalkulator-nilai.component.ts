@@ -5,6 +5,7 @@ import { Subscription } from 'rxjs/Subscription';
 import { KalkulasiNilaiService } from '../kalkulasi-nilai.service';
 import { StateCommunicationComponentsService } from '../../shareds-module/busdata/state-communication-components.service';
 import { singletonInstanceDataNilai as instanceNilai } from '../../shareds-module/local-storages/singleton-data-nilai';
+import { PredikatNilaiHasil } from '../../shareds-module/local-storages/predikat-nilai-hasil';
 
 declare var jquery: any;
 declare var $: any;
@@ -124,13 +125,20 @@ export class KalkulatorNilaiComponent implements OnInit, OnDestroy {
 
   getKategoriPredikatNilai() {
 
-    try {
-      this.nilaiAkhir = this.dataNilaiHasil.numberNilaiAkhir + '';
-      this.nilaiHuruf = this.kalkulatorNilai.getPredikatNilai(this.dataNilaiHasil.numberNilaiAkhir);
-      this.nilaiPredikatKategori = this.kalkulatorNilai.getPredikatNamaNilai(this.dataNilaiHasil.numberNilaiAkhir);
-    } catch (e) {
-      console.log(e);
-    }
+    this.kalkulatorNilai.getPredikatNilai(this.dataNilaiHasil.numberNilaiAkhir)
+      .then(
+        (predikatNilaiHasil: PredikatNilaiHasil) => {
+
+          this.nilaiAkhir = this.dataNilaiHasil.numberNilaiAkhir + '';
+          this.nilaiHuruf = predikatNilaiHasil.stringPredikatNilai;
+          this.nilaiPredikatKategori = predikatNilaiHasil.stringNamaPredikatNilai;
+        }
+      )
+      .catch(
+        (err) => {
+          console.log(err);
+        }
+      );
   }
 
   clickCloseDialog() {

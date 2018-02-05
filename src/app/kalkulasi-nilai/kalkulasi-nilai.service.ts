@@ -11,6 +11,7 @@ import { UtilanPelengkap } from '../shareds-module/utils-pelengkap';
 import { StoresDataService } from '../shareds-module/stores-data.service';
 import { isNullOrUndefined } from 'util';
 import * as Predikat from '../shareds-module/local-storages/predikat-nilai';
+import { singletonInstanceDataNilai as instanceNilai } from '../shareds-module/local-storages/singleton-data-nilai';
 import { DataNilaiKonversi } from '../shareds-module/local-storages/data-nilai';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/from';
@@ -18,6 +19,7 @@ import 'rxjs/add/observable/of';
 import 'rxjs/add/observable/empty';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
+import { PredikatNilaiHasil } from '../shareds-module/local-storages/predikat-nilai-hasil';
 
 @Injectable()
 export class KalkulasiNilaiService {
@@ -114,47 +116,58 @@ export class KalkulasiNilaiService {
    * @param {number} nilaiAkhir
    * @return {string}
    */
-  getPredikatNilai(nilaiAkhir: number): string {
+  getPredikatNilai(nilaiAkhir: number): any {
 
     let stringPredikatNilai = '-';
+    let stringPredikatNamaNilai = '-';
 
-    if (nilaiAkhir > 80) {
-      stringPredikatNilai = Predikat.PREDIKAT_NILAI_A;
-    } else if (nilaiAkhir > 70) {
-      stringPredikatNilai = Predikat.PREDIKAT_NILAI_B;
-    } else if (nilaiAkhir > 60) {
-      stringPredikatNilai = Predikat.PREDIKAT_NILAI_C;
-    } else if (nilaiAkhir > 40) {
-      stringPredikatNilai = Predikat.PREDIKAT_NILAI_D;
-    } else {
-      stringPredikatNilai = Predikat.PREDIKAT_NILAI_E;
-    }
+    const promisePredikatNilai = new Promise<PredikatNilaiHasil>(
+      (resolve) => {
 
-    return stringPredikatNilai;
-  }
+        const predikatNilaiHasil =  new PredikatNilaiHasil();
 
-  /**
-   * get predikat nama nilai berdasarkan nilai akhir
-   * @param {number} nilaiAkhir
-   * @return {string}
-   */
-  getPredikatNamaNilai(nilaiAkhir: number): string {
+        const batasBawahDefaultA = instanceNilai.stringBatasNilaiA;
+        const batasBawahDefaultB = instanceNilai.stringBatasNilaiB;
+        const batasBawahDefaultC = instanceNilai.stringBatasNilaiC;
+        const batasBawahDefaultD = instanceNilai.stringBatasNilaiD;
 
-    let stringPredikatNilai = '-';
+        const floatBatasBawahDefaultA = parseFloat(batasBawahDefaultA);
+        const floatBatasBawahDefaultB = parseFloat(batasBawahDefaultB);
+        const floatBatasBawahDefaultC = parseFloat(batasBawahDefaultC);
+        const floatBatasBawahDefaultD = parseFloat(batasBawahDefaultD);
 
-    if (nilaiAkhir > 80) {
-      stringPredikatNilai = Predikat.PREDIKAT_NAMA_A;
-    } else if (nilaiAkhir > 70) {
-      stringPredikatNilai = Predikat.PREDIKAT_NAMA_B;
-    } else if (nilaiAkhir > 60) {
-      stringPredikatNilai = Predikat.PREDIKAT_NAMA_C;
-    } else if (nilaiAkhir > 40) {
-      stringPredikatNilai = Predikat.PREDIKAT_NAMA_D;
-    } else {
-      stringPredikatNilai = Predikat.PREDIKAT_NAMA_E;
-    }
+        if (nilaiAkhir > floatBatasBawahDefaultA) {
+          stringPredikatNilai = Predikat.PREDIKAT_NILAI_A;
+        } else if (nilaiAkhir > floatBatasBawahDefaultB) {
+          stringPredikatNilai = Predikat.PREDIKAT_NILAI_B;
+        } else if (nilaiAkhir > floatBatasBawahDefaultC) {
+          stringPredikatNilai = Predikat.PREDIKAT_NILAI_C;
+        } else if (nilaiAkhir > floatBatasBawahDefaultD) {
+          stringPredikatNilai = Predikat.PREDIKAT_NILAI_D;
+        } else {
+          stringPredikatNilai = Predikat.PREDIKAT_NILAI_E;
+        }
 
-    return stringPredikatNilai;
+        if (nilaiAkhir > floatBatasBawahDefaultA) {
+          stringPredikatNamaNilai = Predikat.PREDIKAT_NAMA_A;
+        } else if (nilaiAkhir > floatBatasBawahDefaultB) {
+          stringPredikatNamaNilai = Predikat.PREDIKAT_NAMA_B;
+        } else if (nilaiAkhir > floatBatasBawahDefaultC) {
+          stringPredikatNamaNilai = Predikat.PREDIKAT_NAMA_C;
+        } else if (nilaiAkhir > floatBatasBawahDefaultD) {
+          stringPredikatNamaNilai = Predikat.PREDIKAT_NAMA_D;
+        } else {
+          stringPredikatNamaNilai = Predikat.PREDIKAT_NAMA_E;
+        }
+
+        predikatNilaiHasil.stringPredikatNilai = stringPredikatNilai;
+        predikatNilaiHasil.stringNamaPredikatNilai = stringPredikatNamaNilai;
+
+        resolve(predikatNilaiHasil);
+      }
+    );
+
+    return promisePredikatNilai;
   }
 
 }

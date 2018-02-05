@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { StoresDataService } from './stores-data.service';
+import { DataNilaiPenghitungService } from './data-nilai-penghitung.service';
+import { StateCommunicationComponentsService } from './busdata/state-communication-components.service';
 
 @NgModule({
   imports: [
@@ -8,7 +10,10 @@ import { StoresDataService } from './stores-data.service';
   ],
   declarations: [],
   providers: [
-    StoresDataService
+    StoresDataService,
+    StateCommunicationComponentsService,
+    DataNilaiPenghitungService
   ]
 })
-export class SharedsModuleModule { }
+export class SharedsModuleModule {
+}
