@@ -1,6 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-import { UtilanPelengkap } from '../../shareds-module/utils-pelengkap';
-import { DataNilaiKonversi } from '../../shareds-module/local-storages/data-nilai';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs/Subscription';
 
 declare var jquery: any;
@@ -11,27 +9,11 @@ declare var $: any;
   templateUrl: './setelan-kalkulator.component.html',
   styleUrls: ['./setelan-kalkulator.component.css']
 })
-export class SetelanKalkulatorComponent implements OnInit {
-
-  nilaiTugas = '';
-  nilaiUTS = '';
-  nilaiUAS = '';
-  nilaiAkhir = '0';
-  nilaiHuruf = '-';
-  nilaiPredikatKategori = '-';
+export class SetelanKalkulatorComponent implements OnInit, OnDestroy {
 
   isNilaiTugasValid = true;
   isNilaiUTSValid = true;
   isNilaiUASValid = true;
-
-  nilaiTugasKet = '0%';
-  nilaiUTSKet = '0%';
-  nilaiUASKet = '0%';
-
-  dataNilaiKonversi: DataNilaiKonversi;
-  dataNilaiHasil: DataNilaiKonversi;
-  utilanPelengkap: UtilanPelengkap;
-
 
   stringPengaliNilaiTugas = '0';
   stringPengaliNilaiUTS = '0';
@@ -51,6 +33,9 @@ export class SetelanKalkulatorComponent implements OnInit {
   }
 
   ngOnInit() {
+  }
+
+  ngOnDestroy(): void {
   }
 
   getDataBatasBawahNilai() {

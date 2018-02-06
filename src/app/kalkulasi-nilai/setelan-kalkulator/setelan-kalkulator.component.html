@@ -14,7 +14,7 @@
           <!-- nilai tugas  default 20 %-->
           <div class="field">
             <label for="input_tugas">Persentase Nilai Tugas</label>
-            <input id="input_tugas" type="text" name="nilai_tugas" [(ngModel)]="nilaiTugas">
+            <input id="input_tugas" type="text" name="nilai_tugas" [(ngModel)]="stringPengaliNilaiTugas">
           </div>
 
           <div class="ui negative message" *ngIf="!isNilaiTugasValid">
@@ -25,7 +25,7 @@
           <!-- nilai uts default 35 %-->
           <div class="field">
             <label for="input_nilai_uts">Persentase Nilai UTS</label>
-            <input id="input_nilai_uts" type="text" name="nilai_uts" [(ngModel)]="nilaiUTS">
+            <input id="input_nilai_uts" type="text" name="nilai_uts" [(ngModel)]="stringPengaliNilaiUTS">
           </div>
 
           <div class="ui negative message" *ngIf="!isNilaiUTSValid">
@@ -36,7 +36,7 @@
           <!-- nilai uas default 45 % -->
           <div class="field">
             <label for="input_nilai_uas">Persentase Nilai UAS</label>
-            <input id="input_nilai_uas" type="text" name="nilai_uas" [(ngModel)]="nilaiUAS">
+            <input id="input_nilai_uas" type="text" name="nilai_uas" [(ngModel)]="stringPengaliNilaiUAS">
           </div>
 
           <div class="ui negative message" *ngIf="!isNilaiUASValid">
@@ -47,37 +47,34 @@
           <!-- nilai batas bawah -->
           <!-- batas bawah nilai A -->
           <div class="field">
-            <label for="input_batasbawah_nilaiA"></label>
-            <input id="input_batasbawah_nilaiA" type="text" name = "batasbawah_A">
+            <label for="input_batasbawah_nilaiA">Batas Bawah Nilai A</label>
+            <input id="input_batasbawah_nilaiA" type="text" name="batasbawah_A"
+                   placeholder="batas minimum untuk nilai A"
+                   [(ngModel)]="stringBatasBawahNilaiA">
           </div>
 
           <!-- batas bawah nilai B -->
+          <div class="field">
+            <label for="input_batasbawah_nilaiB">Batas Bawah Nilai B</label>
+            <input id="input_batasbawah_nilaiB" type="text" name="batasbawah_B"
+                   placeholder="batas minimum untuk nilai B"
+                   [(ngModel)]="stringBatasBawahNilaiB">
+          </div>
 
           <!-- batas bawah nilai C -->
+          <div class="field">
+            <label for="input_batasbawah_nilaiC">Batas Bawah Nilai C</label>
+            <input id="input_batasbawah_nilaiC" type="text" name="batasbawah_C"
+                   placeholder="batas minimum untuk nilai C"
+                   [(ngModel)]="stringBatasBawahNilaiC">
+          </div>
 
           <!-- batas bawah nilai D -->
-
-
-
-          <!--nilai akhir-->
           <div class="field">
-            <label for="disabled_nilai_akhir">Nilai Akhir</label>
-            <input disabled value="I am not editable" id="disabled_nilai_akhir" type="text" [(ngModel)]="nilaiAkhir"
-                   name="nilai_akhir" class="black_bold_result">
-          </div>
-
-          <!-- nilai huruf -->
-          <div class="field">
-            <label for="disabled_nilai_huruf">Nilai Huruf</label>
-            <input disabled value="belum tersedia" id="disabled_nilai_huruf" type="text" [(ngModel)]="nilaiHuruf"
-                   name="nilai_huruf" class="black_bold_result">
-          </div>
-
-          <!-- nilai predikat -->
-          <div class="field col">
-            <label for="disabled_nilai_predikat">Predikat Nilai</label>
-            <input disabled value="belum tersedia" id="disabled_nilai_predikat" type="text"
-                   [(ngModel)]="nilaiPredikatKategori" name="nilai_predikat" class="black_bold_result">
+            <label for="input_batasbawah_nilaiD">Batas Bawah Nilai D</label>
+            <input id="input_batasbawah_nilaiD" type="text" name="batasbawah_D"
+                   placeholder="batas minimum untuk nilai D"
+                   [(ngModel)]="stringBatasBawahNilaiD">
           </div>
 
           <div class="ui negative message" *ngIf="!isInputDataOk">
