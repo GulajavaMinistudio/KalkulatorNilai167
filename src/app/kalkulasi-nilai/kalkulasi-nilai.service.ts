@@ -121,10 +121,10 @@ export class KalkulasiNilaiService {
     let stringPredikatNilai = '-';
     let stringPredikatNamaNilai = '-';
 
-    const promisePredikatNilai = new Promise<PredikatNilaiHasil>(
+    return new Promise<PredikatNilaiHasil>(
       (resolve) => {
 
-        const predikatNilaiHasil =  new PredikatNilaiHasil();
+        const predikatNilaiHasil = new PredikatNilaiHasil();
 
         const batasBawahDefaultA = instanceNilai.stringBatasNilaiA;
         const batasBawahDefaultB = instanceNilai.stringBatasNilaiB;
@@ -166,8 +166,6 @@ export class KalkulasiNilaiService {
         resolve(predikatNilaiHasil);
       }
     );
-
-    return promisePredikatNilai;
   }
 
 }

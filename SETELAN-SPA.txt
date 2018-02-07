@@ -1,0 +1,5 @@
+// di halaman angular cli .json, jangan lupa untuk hilangkan keteran path ini, jika akan dibuild ke produksi
+// ganti link library nya ke CDN saja
+"../node_modules/jquery/dist/jquery.min.js",
+"../semantic/dist/semantic.min.js",
+"../semantic/dist/semantic.min.css"

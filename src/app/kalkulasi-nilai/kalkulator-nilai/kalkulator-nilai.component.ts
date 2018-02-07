@@ -1,11 +1,11 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { DataNilaiKonversi } from '../../shareds-module/local-storages/data-nilai';
-import { UtilanPelengkap } from '../../shareds-module/utils-pelengkap';
 import { Subscription } from 'rxjs/Subscription';
 import { KalkulasiNilaiService } from '../kalkulasi-nilai.service';
 import { StateCommunicationComponentsService } from '../../shareds-module/busdata/state-communication-components.service';
 import { singletonInstanceDataNilai as instanceNilai } from '../../shareds-module/local-storages/singleton-data-nilai';
 import { PredikatNilaiHasil } from '../../shareds-module/local-storages/predikat-nilai-hasil';
+import { UtilanPelengkap } from '../../shareds-module/utils-pelengkap';
 
 declare var jquery: any;
 declare var $: any;
@@ -42,7 +42,14 @@ export class KalkulatorNilaiComponent implements OnInit, OnDestroy {
               private stateCommService: StateCommunicationComponentsService) {
     this.compositeSubscriber = new Subscription();
     this.subscribeDataBusKomponen();
-    this.utilanPelengkap = new UtilanPelengkap();
+
+    // tes pakai dynamic import
+    // this.utilanPelengkap = new UtilanPelengkap();
+    import('../../shareds-module/utils-pelengkap')
+      .then(modules => {
+        this.utilanPelengkap = new modules.UtilanPelengkap();
+      })
+      .catch(err => console.log(err));
   }
 
   ngOnInit() {
@@ -59,7 +66,7 @@ export class KalkulatorNilaiComponent implements OnInit, OnDestroy {
   subscribeDataBusKomponen() {
 
     this.compositeSubscriber.add(
-      this.stateCommService.dataNilaiBusSendHomeComponent$.subscribe(
+      this.stateCommService.dataNilaiBusHomeComponent$.subscribe(
         isSukses => {
 
           // set data
@@ -139,6 +146,17 @@ export class KalkulatorNilaiComponent implements OnInit, OnDestroy {
           console.log(err);
         }
       );
+  }
+
+  resetIsianNilai() {
+    this.nilaiTugas = '';
+    this.nilaiUTS = '';
+    this.nilaiUAS = '';
+    this.nilaiAkhir = '0';
+    this.nilaiHuruf = '-';
+    this.nilaiPredikatKategori = '-';
+
+    this.clickCloseDialog();
   }
 
   clickCloseDialog() {

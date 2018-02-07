@@ -29,7 +29,6 @@ export class ChromeBrowserGuardGuard implements CanActivate, CanActivateChild, C
    */
   canLoad(route: Route): Observable<boolean> | Promise<boolean> | boolean {
 
-    console.log('auth guard jalan');
     const urlBrowser = `/${route.path}`;
     const isBrowserSupport = this.cekBrowserChrome(urlBrowser);
 
@@ -49,7 +48,6 @@ export class ChromeBrowserGuardGuard implements CanActivate, CanActivateChild, C
     if (!this.authBrowserService.isBrowserSupport) {
       // Store the attempted URL for redirecting
       this.authBrowserService.stringRedirectUrl = stringurl;
-      console.log('browser guard jalan, is chrome, ' + this.authBrowserService.isBrowserSupport);
       this.router.navigate(['/tentang-aplikasi/lebih-lancar-pake-chrome']);
     }
     return true;

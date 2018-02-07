@@ -23,8 +23,6 @@ export class AuthBrowserTipeService {
     if (isChromeChromium || isBlinkEngineOpera) {
       isBrowserOke = true;
     }
-    console.log(window.navigator.userAgent + ' ' + isBrowserOke);
-
     return isBrowserOke;
   }
 }

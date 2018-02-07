@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-tentang-app-about',
@@ -7,9 +8,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TentangAppAboutComponent implements OnInit {
 
-  constructor() { }
+  stringTanggalSekarang: string;
+
+  constructor(private routers: Router) { }
 
   ngOnInit() {
+    this.getTahunSekarang();
   }
 
+  getTahunSekarang() {
+
+    const dateTanggal = new Date();
+    this.stringTanggalSekarang = dateTanggal.getFullYear().toString();
+  }
+
+  navigasiBalik() {
+    this.routers.navigate(['/hitung-nilai/kalkulator-nilai']);
+  }
 }

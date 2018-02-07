@@ -149,6 +149,33 @@ export class DataNilaiPenghitungService {
     );
   }
 
+  saveDataNilaiSetelanLocalStorage() {
+
+    return new Promise(
+      resolve => {
+
+        const stringPengaliNilaiTugas = instanceNilai.stringPengaliNilaiTugas;
+        const stringPengaliNilaiUTS = instanceNilai.stringPengaliNilaiUTS;
+        const stringPengaliNilaiUAS = instanceNilai.stringPengaliNilaiUAS;
+
+        this.storesLocal.addDataLocalStorage(KEY_PENGALI_TUGAS, stringPengaliNilaiTugas);
+        this.storesLocal.addDataLocalStorage(KEY_PENGALI_UTS, stringPengaliNilaiUTS);
+        this.storesLocal.addDataLocalStorage(KEY_PENGALI_UAS, stringPengaliNilaiUAS);
+
+        const stringBatasBawahNilaiA = instanceNilai.stringBatasNilaiA;
+        const stringBatasBawahNilaiB = instanceNilai.stringBatasNilaiB;
+        const stringBatasBawahNilaiC = instanceNilai.stringBatasNilaiC;
+        const stringBatasBawahNilaiD = instanceNilai.stringBatasNilaiD;
+
+        this.storesLocal.addDataLocalStorage(KEY_BATASBAWAH_NILAI_A, stringBatasBawahNilaiA);
+        this.storesLocal.addDataLocalStorage(KEY_BATASBAWAH_NILAI_B, stringBatasBawahNilaiB);
+        this.storesLocal.addDataLocalStorage(KEY_BATASBAWAH_NILAI_C, stringBatasBawahNilaiC);
+        this.storesLocal.addDataLocalStorage(KEY_BATASBAWAH_NILAI_D, stringBatasBawahNilaiD);
+        resolve(true);
+      }
+    );
+  }
+
   getDataBatasBawahSemua(): any {
 
     return new Promise(

@@ -5,21 +5,22 @@ import { Subject } from 'rxjs/Subject';
 export class StateCommunicationComponentsService {
 
   // observable any sources untuk komunikasi parent component ke component kalkulator
-  dataNilaiBusSendHomeComponent = new Subject<any>();
+  dataNilaiBusHomeComponent = new Subject<any>();
   // observable string streams
-  dataNilaiBusSendHomeComponent$ = this.dataNilaiBusSendHomeComponent.asObservable();
+  dataNilaiBusHomeComponent$ = this.dataNilaiBusHomeComponent.asObservable();
 
-  // observable any untuk komunikasi dari settings component ke parent component
-  notifRefreshData = new Subject<any>();
-  notifRefreshData$ = this.notifRefreshData.asObservable();
+  // subject observable untuk meminta data ke komponen utama dari kalkulator, dari halaman setelan
+  dataSetelanRequest = new Subject<any>();
+  dataSetelanRequest$ = this.dataSetelanRequest.asObservable();
 
-  constructor() { }
-
-  sendBusDataNilaiToKomponen(value: any) {
-    this.dataNilaiBusSendHomeComponent.next(value);
+  constructor() {
   }
 
-  sendBusRefreshDataFromSettings() {
-    this.notifRefreshData.next(true);
+  sendBusDataNilaiToKomponen(value: any) {
+    this.dataNilaiBusHomeComponent.next(value);
+  }
+
+  sendBusDataSetelan(kodeBus: number) {
+    this.dataSetelanRequest.next(kodeBus);
   }
 }

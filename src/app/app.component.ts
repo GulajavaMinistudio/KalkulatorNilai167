@@ -2,6 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs/Subscription';
 import { DataNilaiPenghitungService } from './shareds-module/data-nilai-penghitung.service';
 import { StateCommunicationComponentsService } from './shareds-module/busdata/state-communication-components.service';
+import { REFRESH_DATA_FROMSETTINGS, REQUEST_KIRIMDATA_SETELAN, REQUEST_MINTADATA_SETELAN } from './shareds-module/busdata/konstan-bus';
 
 @Component({
   selector: 'app-root',
@@ -12,7 +13,7 @@ export class AppComponent implements OnInit, OnDestroy {
 
   subscriptions: Subscription;
 
-  constructor(private initAwalService: DataNilaiPenghitungService,
+  constructor(private dataServices: DataNilaiPenghitungService,
               private busServiceToComp: StateCommunicationComponentsService) {
     this.subscriptions = new Subscription();
   }
@@ -23,7 +24,7 @@ export class AppComponent implements OnInit, OnDestroy {
       this.subscriptions = new Subscription();
     }
 
-    this.initSubscriberFromSettings();
+    this.initSubscriberSettingMintaData();
 
     // cek data awal tersedia
     this.checkDataAwalTersedia();
@@ -34,23 +35,31 @@ export class AppComponent implements OnInit, OnDestroy {
     this.subscriptions.unsubscribe();
   }
 
-  initSubscriberFromSettings() {
+  initSubscriberSettingMintaData() {
 
-    this.busServiceToComp.notifRefreshData$.subscribe(
-      () => {
-        this.getDataAwalLocalStorageFromSettings();
-      },
-      (err) => {
-        console.log(err);
-      }
+    this.subscriptions.add(
+      this.busServiceToComp.dataSetelanRequest$.subscribe(
+        (kodebus: number) => {
+
+          if (kodebus === REQUEST_MINTADATA_SETELAN) {
+            this.getDataNilaiToSettings();
+          } else if (kodebus === REFRESH_DATA_FROMSETTINGS) {
+            this.checkDataAwalTersedia();
+          }
+        },
+        (err) => {
+          console.log(err);
+        }
+      )
     );
   }
+
 
   // cek apakah local storage tersimpan
   checkDataAwalTersedia() {
 
     // cek status data awal pengali tersedia
-    this.initAwalService.checkNilaiPengaliTersedia()
+    this.dataServices.checkNilaiPengaliTersedia()
       .then(
         (isDataTersedia: boolean) => {
           if (isDataTersedia) {
@@ -67,28 +76,25 @@ export class AppComponent implements OnInit, OnDestroy {
       );
 
     // cek status data awal predikat nilai batas bawah
-    this.initAwalService.checkDataBatasBawahNilaiTersedia()
+    this.checkInitDataBatasBawahNilai()
       .then(
-        (isTersedia: boolean) => {
-
-          if (isTersedia) {
-            this.getDataBatasBawahNilaiLocalStorage();
-          } else {
-            this.initDataAwalBatasBawahNilai();
-          }
+        () => {
+          // sukses inisialisasi data batas bawah nilai
         }
       )
       .catch(
-        (errors) => {
-          console.log(errors);
+        err => {
+          console.log(err);
         }
       );
   }
 
-  // inisialisasi local storage data pengali default
+  /***
+   * Ambil dan inisialisasi data pengali nilai untuk dikirim ke komponen kalkulator
+   **/
   initDataAwalPengaliLocalStorage() {
 
-    this.initAwalService.initDataNilaiPengaliKalkulasi()
+    this.dataServices.initDataNilaiPengaliKalkulasi()
       .then(
         (isbooleanSukses) => {
 
@@ -104,13 +110,58 @@ export class AppComponent implements OnInit, OnDestroy {
       );
   }
 
-  // inisialisasi local storage batas bawah default
-  initDataAwalBatasBawahNilai() {
+  /***
+   * Ambil data pengali local storage
+   */
+  getDataAwalPengaliLocalStorage() {
 
-    this.initAwalService.initDataBatasBawahKategoriNilai()
+    this.dataServices.getDataPengaliLocalStorageSemua()
       .then(
         (isSukses) => {
 
+          if (isSukses) {
+            this.sendBusKeKomponenKalkulator();
+          }
+        }
+      )
+      .catch(
+        (err) => {
+          console.log(err);
+        }
+      );
+  }
+
+
+  /***
+   * Ambil data nilai awal pengali dan nilai batas bawah terlebih dahulu
+   */
+  async checkInitDataBatasBawahNilai() {
+
+    try {
+      const isBatasBawahAda: boolean = await this.dataServices.checkDataBatasBawahNilaiTersedia();
+
+      if (isBatasBawahAda) {
+        await this.dataServices.getDataBatasBawahSemua();
+      } else {
+        const isSukses: boolean = await this.dataServices.initDataBatasBawahKategoriNilai();
+        if (isSukses) {
+          await this.dataServices.getDataBatasBawahSemua();
+        }
+      }
+    } catch (e) {
+      throw e;
+    }
+  }
+
+  // Sub komponen setelan meminta data terkini dari komponen halaman utama
+  getDataNilaiToSettings() {
+
+    this.getDataNilaiToSettingsAwait()
+      .then(
+        isOke => {
+          if (isOke) {
+            this.sendBusKomponenSetelan();
+          }
         }
       )
       .catch(
@@ -120,43 +171,23 @@ export class AppComponent implements OnInit, OnDestroy {
       );
   }
 
-  // ambil data pengali local storage
-  getDataAwalPengaliLocalStorage() {
+  // alternatif menggunakan async await
+  async getDataNilaiToSettingsAwait() {
 
-    this.initAwalService.getDataPengaliLocalStorageSemua()
-      .then(
-        (isSukses) => {
+    try {
+      const isSuksesCekPengali = await this.dataServices.checkNilaiPengaliTersedia();
+      const isSuksesCekBatasBawah = await this.dataServices.checkDataBatasBawahNilaiTersedia();
+      const isOkGetDataPengali = await this.dataServices.getDataPengaliLocalStorageSemua();
+      const isOkGetDataBatasBawah = await this.dataServices.getDataBatasBawahSemua();
 
-          if (isSukses) {
-            this.sendBusKeKomponen();
-          }
-        }
-      )
-      .catch(
-        (err) => {
-          console.log(err);
-        }
-      );
+      return (isSuksesCekPengali && isSuksesCekBatasBawah && isOkGetDataPengali && isOkGetDataBatasBawah);
+    } catch (e) {
+      throw e;
+    }
   }
 
-  // ambil data batas bawah nilai dan inisialisasi ke singleton
-  getDataBatasBawahNilaiLocalStorage() {
-
-    this.initAwalService.getDataBatasBawahSemua()
-      .then(
-        (isSukses) => {
-
-        }
-      )
-      .catch(
-        errors => {
-
-        }
-      );
-  }
-
-  // kirim ke komponen anak
-  sendBusKeKomponen() {
+  // kirim ke komponen kalkulator penghitung
+  sendBusKeKomponenKalkulator() {
     setTimeout(
       () => {
         this.busServiceToComp.sendBusDataNilaiToKomponen(true);
@@ -164,37 +195,12 @@ export class AppComponent implements OnInit, OnDestroy {
     );
   }
 
-
-  /**
-   * Ambil data awal kembali setelah setelan diperbarui di menu setelan
-   */
-  getDataAwalLocalStorageFromSettings() {
-
-    this.initAwalService.getDataPengaliLocalStorageSemua()
-      .then(
-        (isSukses) => {
-
-          if (isSukses) {
-            this.sendBusKeKomponenHomeFromSettings();
-          }
-        }
-      )
-      .catch(
-        (err) => {
-          console.log(err);
-        }
-      );
-  }
-
-
-  /**
-   * Kirim data awal kembali ke halaman bus komponen service
-   */
-  sendBusKeKomponenHomeFromSettings() {
+  // kirim ke komponen setelan kalkulator
+  sendBusKomponenSetelan() {
     setTimeout(
       () => {
-        this.busServiceToComp.sendBusRefreshDataFromSettings();
-      }, 2000
+        this.busServiceToComp.sendBusDataSetelan(REQUEST_KIRIMDATA_SETELAN);
+      }, 600
     );
   }
 }

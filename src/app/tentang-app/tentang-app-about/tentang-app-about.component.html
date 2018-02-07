@@ -1,3 +1,58 @@
-<p>
-  tentang-app-about works!
-</p>
+<div class="ui container">
+  <br>
+  <div class="ui one stackable cards">
+
+    <div class="card">
+      <div class="content">
+        <div class="header">Tentang Aplikasi</div>
+      </div>
+      <div class="content">
+
+        <!-- halaman about app  -->
+
+        <div class="ui items">
+
+          <!-- halaman versi aplikasi dan tentang aplikasinya-->
+          <div class="item">
+            <div class="ui tiny image">
+              <img src="./assets/calculator-flat.png">
+            </div>
+            <div class="middle aligned content">
+              <div class="header">Kalkulator Nilai Pelajaran v1.0.0</div>
+              <div class="description">
+                <p>Aplikasi untuk menghitung nilai mata pelajaran berdasarkan nilai tugas, nilai Ujian Tengah
+                  Semester(UTS), dan nilai Ujian Akhir Semester (UAS). Hasil perhitungan akan menampilkan nilai mata
+                  pelajaran berdasarkan angka, berdasarkan alphabet, dan
+                  predikat nilai yang telah dihitung.</p>
+              </div>
+            </div>
+          </div>
+
+          <br>
+          <!-- Halaman pembuat aplikasi web app nya -->
+          <div class="item">
+            <div class="ui tiny image">
+              <img src="./assets/gulajavas.png">
+            </div>
+            <div class="middle aligned content">
+              <div class="header">Dibuat dengan <i class="fas fa-heart fas-heart-color"></i> oleh Gulajava &copy; {{stringTanggalSekarang}}</div>
+              <div class="description">
+                <p>Aplikasi ini dibuat dengan bantuan Angular dan Angular CLI, dengan library Semantic UI, dan Font Awesome Icon. Kode
+                sumber dari aplikasi ini bisa langsung di cek di Github <a
+                    href="https://github.com/GulajavaMinistudio/KalkulatorNilai167">Kode Sumber Kalkulator Nilai</a> </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- tombol -->
+      <div class="extra content">
+        <div class="ui right floated" style="float: right;">
+          <button type="submit" class="ui red button" (click)="navigasiBalik()">Kembali</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>

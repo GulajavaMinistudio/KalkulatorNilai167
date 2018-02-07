@@ -13,7 +13,7 @@
 
           <!-- nilai tugas  default 20 %-->
           <div class="field">
-            <label for="input_tugas">Persentase Nilai Tugas</label>
+            <label for="input_tugas">Persentase Nilai Tugas ( % )</label>
             <input id="input_tugas" type="text" name="nilai_tugas" [(ngModel)]="stringPengaliNilaiTugas">
           </div>
 
@@ -24,7 +24,7 @@
 
           <!-- nilai uts default 35 %-->
           <div class="field">
-            <label for="input_nilai_uts">Persentase Nilai UTS</label>
+            <label for="input_nilai_uts">Persentase Nilai UTS ( % )</label>
             <input id="input_nilai_uts" type="text" name="nilai_uts" [(ngModel)]="stringPengaliNilaiUTS">
           </div>
 
@@ -35,7 +35,7 @@
 
           <!-- nilai uas default 45 % -->
           <div class="field">
-            <label for="input_nilai_uas">Persentase Nilai UAS</label>
+            <label for="input_nilai_uas">Persentase Nilai UAS ( % )</label>
             <input id="input_nilai_uas" type="text" name="nilai_uas" [(ngModel)]="stringPengaliNilaiUAS">
           </div>
 
@@ -88,8 +88,8 @@
       <!-- tombol -->
       <div class="extra content">
         <div class="ui right floated" style="float: right;">
-          <button type="submit" class="ui blue button">Simpan</button>
-          <button type="submit" class="ui red button">Batal</button>
+          <button type="submit" class="ui blue button" (click)="checkIsianNilaiBatasBawah()">Simpan</button>
+          <button type="submit" class="ui red button" (click)="navigasiBalikKeHalamanKalkulator()">Batal</button>
         </div>
       </div>
     </div>
