@@ -1,0 +1,44 @@
+{
+  "index": "/index.html",
+  "assetGroups": [
+    {
+      "name": "app",
+      "installMode": "prefetch",
+      "resources": {
+        "files": [
+          "/favicon.ico",
+          "/index.html"
+        ],
+        "versionedFiles": [
+          "/*.bundle.css",
+          "/*.bundle.js",
+          "/*.chunk.js"
+        ]
+      }
+    },
+    {
+      "name": "assets",
+      "installMode": "lazy",
+      "updateMode": "prefetch",
+      "resources": {
+        "files": [
+          "/assets/**"
+        ]
+      }
+    },
+    {
+      "name": "cdn_assets",
+      "installMode":"prefetch",
+      "updateMode": "prefetch",
+      "resources": {
+        "urls": [
+          "https://fonts.googleapis.com/icon?family=Material+Icons",
+          "https://cdn.jsdelivr.net/npm/semantic-ui@2/dist/semantic.min.css",
+          "https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js",
+          "https://cdn.jsdelivr.net/npm/semantic-ui@2/dist/semantic.min.js",
+          "https://use.fontawesome.com/releases/v5.0.6/js/all.js"
+        ]
+      }
+    }
+  ]
+}

@@ -10,7 +10,7 @@
     "lint": "ng lint",
     "e2e": "ng e2e",
     "prod": "ng build --prod --aot --build-optimizer",
-    "testservers": "cd dist && live-server --port=4200 --host=localhost --entry-file=/index.html"
+    "liveserver": "cd dist && live-server --port=4200 --host=localhost --entry-file=/index.html"
   },
   "private": true,
   "dependencies": {
@@ -23,6 +23,7 @@
     "@angular/platform-browser": "^5.2.0",
     "@angular/platform-browser-dynamic": "^5.2.0",
     "@angular/router": "^5.2.0",
+    "@angular/service-worker": "^5.2.3",
     "classlist.js": "^1.1.20150312",
     "core-js": "^2.4.1",
     "jquery": "^3.3.1",

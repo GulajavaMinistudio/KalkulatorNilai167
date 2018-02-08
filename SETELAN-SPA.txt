@@ -1,5 +1,9 @@
-// di halaman angular cli .json, jangan lupa untuk hilangkan keteran path ini, jika akan dibuild ke produksi
+// di halaman angular cli .json, jangan lupa untuk hilangkan keterangan path ini di styles[] dan scripts[], jika akan dibuild ke produksi
 // ganti link library nya ke CDN saja
 "../node_modules/jquery/dist/jquery.min.js",
 "../semantic/dist/semantic.min.js",
 "../semantic/dist/semantic.min.css"
+"../font-awesome/css/fontawesome-all.min.css"
+
+/* You can add global styles to this file, and also import other style files */
+/*@import '../semantic/dist/semantic.min.css';*/

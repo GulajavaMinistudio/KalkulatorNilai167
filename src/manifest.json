@@ -1,0 +1,36 @@
+{
+  "short_name": "Calc Nilai",
+  "name": "Kalkulator Nilai Pelajaran",
+  "start_url": "./index.html",
+  "description": "Aplikasi untuk menghitung nilai mata pelajaran berdasarkan nilai tugas, nilai Ujian Tengah Semester(UTS), dan nilai Ujian Akhir Semester (UAS). Hasil perhitungan akan menampilkan nilai mata  pelajaran berdasarkan angka, berdasarkan alphabet, dan predikat nilai yang telah dihitung.",
+  "icons": [
+    {
+      "src": "/assets/calculator-flat.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/assets/calculator-flat.png",
+      "sizes": "256x256",
+      "type": "image/png"
+    },
+    {
+      "src": "/assets/calculator-flat.png",
+      "sizes": "384x384",
+      "type": "image/png"
+    },
+    {
+      "src": "/assets/calculator-flat.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "background_color": "#009688",
+  "theme_color": "#009688",
+  "display": "standalone",
+  "orientation": "portrait",
+  "related_applications": [{
+    "platform": "play",
+    "url": "https://play.google.com/store/apps/details?id=gulajava.uud"
+  }]
+}
