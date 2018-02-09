@@ -13,13 +13,13 @@
 
           <!-- nilai tugas  default 20 %-->
           <div class="field">
-            <label for="input_tugas">Persentase Nilai Tugas ( % )</label>
+            <label for="input_tugas">Persentase Rata-rata Nilai Tugas ( % )</label>
             <input id="input_tugas" type="text" name="nilai_tugas" [(ngModel)]="stringPengaliNilaiTugas">
           </div>
 
           <div class="ui negative message" *ngIf="!isNilaiTugasValid">
             <i class="close icon" (click)="clickCloseDialog()"></i>
-            <p>Silahkan isi persentase nilai tugas dengan benar</p>
+            <p>Silahkan isi persentase rata-rata nilai tugas dengan benar</p>
           </div>
 
           <!-- nilai uts default 35 %-->

@@ -7,8 +7,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ChromeDownloadGuardComponent implements OnInit {
 
-  titleChrome = 'Maaf, browser yang anda gunakan tidak mendukung layanan web ini. ' +
-    'Untuk berselancar di internet dengan cepat, aman, dan pengalaman lebih baik, silahkan gunakan browser Google Chrome';
+  titleChrome = 'Maaf, layanan web ini lebih lancar digunakan dengan menggunakan browser Google Chrome. ' +
+    'Silahkan unduh Google Chrome melalui tautan di bawah ini.';
 
   constructor() {
   }

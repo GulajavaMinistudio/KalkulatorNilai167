@@ -13,13 +13,13 @@
 
           <!-- nilai tugas  default 20 %-->
           <div class="field">
-            <label for="input_tugas">Nilai Tugas ({{nilaiTugasKet}})</label>
+            <label for="input_tugas">Rata-rata Nilai Tugas ({{nilaiTugasKet}})</label>
             <input id="input_tugas" type="text" name="nilai_tugas" [(ngModel)]="nilaiTugas">
           </div>
 
           <div class="ui negative message" *ngIf="!isNilaiTugasValid">
             <i class="close icon" (click)="clickCloseDialog()"></i>
-            <p>Silahkan isi nilai tugas dengan benar</p>
+            <p>Silahkan isi rata-rata nilai tugas dengan benar</p>
           </div>
 
           <!-- nilai uts default 35 %-->
@@ -53,7 +53,7 @@
 
           <!-- nilai huruf -->
           <div class="field">
-            <label for="disabled_nilai_huruf">Nilai Huruf</label>
+            <label for="disabled_nilai_huruf">Peringkat Nilai</label>
             <input value="belum tersedia" id="disabled_nilai_huruf" type="text" [(ngModel)]="nilaiHuruf"
                    name="nilai_huruf" class="black_bold_result">
           </div>

@@ -15,10 +15,6 @@ const TentangAppRoutes: Routes = [
         path: '',
         children: [
           {
-            path: 'lebih-lancar-pake-chrome',
-            component: ChromeDownloadGuardComponent
-          },
-          {
             path: 'about-app',
             component: TentangAppAboutComponent,
             canActivate: [ChromeBrowserGuardGuard]

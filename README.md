@@ -1,6 +1,7 @@
 # HitungNilaiPelajaran167
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.6.7.
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.6.7. 
+Ketika akan dibuat menjadi mode produksi, jangan lupa untuk mengganti referensi library yang dipakai di Angular CLI JSON ke referensi CDN yang ada di index.html utama.
 
 ## Development server
 

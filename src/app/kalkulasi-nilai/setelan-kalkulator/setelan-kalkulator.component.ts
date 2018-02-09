@@ -114,23 +114,18 @@ export class SetelanKalkulatorComponent implements OnInit, OnDestroy {
 
     if (!this.utilPelengkap.isValidNumberFloatBenar(this.stringBatasBawahNilaiA)) {
       isDataBatasBawahBenar = false;
-      this.isInputDataOk = false;
-      this.pesanInputDataNotValid = 'Isi batas nilai A dengan benar';
+      this.showPesanErrorMasukan(false, 'Isi batas nilai A dengan benar');
     } else if (!this.utilPelengkap.isValidNumberFloatBenar(this.stringBatasBawahNilaiB)) {
       isDataBatasBawahBenar = false;
-      this.isInputDataOk = false;
-      this.pesanInputDataNotValid = 'Isi batas nilai B dengan benar';
+      this.showPesanErrorMasukan(false, 'Isi batas nilai B dengan benar');
     } else if (!this.utilPelengkap.isValidNumberFloatBenar(this.stringBatasBawahNilaiC)) {
       isDataBatasBawahBenar = false;
-      this.isInputDataOk = false;
-      this.pesanInputDataNotValid = 'Isi batas nilai C dengan benar';
+      this.showPesanErrorMasukan(false, 'Isi batas nilai C dengan benar');
     } else if (!this.utilPelengkap.isValidNumberFloatBenar(this.stringBatasBawahNilaiD)) {
       isDataBatasBawahBenar = false;
-      this.isInputDataOk = false;
-      this.pesanInputDataNotValid = 'Isi batas nilai D dengan benar';
+      this.showPesanErrorMasukan(false, 'Isi batas nilai D dengan benar');
     } else {
       isDataBatasBawahBenar = true;
-      this.isInputDataOk = true;
     }
 
     if (isDataPengaliBenar && isDataBatasBawahBenar) {
@@ -144,22 +139,108 @@ export class SetelanKalkulatorComponent implements OnInit, OnDestroy {
       if (totalPengaliNilai === 100) {
         if (isDataBatasBawahBenar) {
 
-          instanceNilai.stringPengaliNilaiTugas = this.stringPengaliNilaiTugas;
-          instanceNilai.stringPengaliNilaiUTS = this.stringPengaliNilaiUTS;
-          instanceNilai.stringPengaliNilaiUAS = this.stringPengaliNilaiUAS;
+          // data batas bawah tidak boleh sama dan harus saling lebih besar jika peringkat nilai semakin tinggi
+          const batasBawahNilaiA = parseFloat(this.stringBatasBawahNilaiA);
+          const batasBawahNilaiB = parseFloat(this.stringBatasBawahNilaiB);
+          const batasBawahNilaiC = parseFloat(this.stringBatasBawahNilaiC);
+          const batasBawahNilaiD = parseFloat(this.stringBatasBawahNilaiD);
 
-          instanceNilai.stringBatasNilaiA = this.stringBatasBawahNilaiA;
-          instanceNilai.stringBatasNilaiB = this.stringBatasBawahNilaiB;
-          instanceNilai.stringBatasNilaiC = this.stringBatasBawahNilaiC;
-          instanceNilai.stringBatasNilaiD = this.stringBatasBawahNilaiD;
+          const isBatasBawahOke = this.validasiBatasBawahOk(batasBawahNilaiA, batasBawahNilaiB, batasBawahNilaiC, batasBawahNilaiD);
+          if (isBatasBawahOke) {
+            instanceNilai.stringPengaliNilaiTugas = this.stringPengaliNilaiTugas;
+            instanceNilai.stringPengaliNilaiUTS = this.stringPengaliNilaiUTS;
+            instanceNilai.stringPengaliNilaiUAS = this.stringPengaliNilaiUAS;
 
-          this.saveDataSetelanLocalStorage();
+            instanceNilai.stringBatasNilaiA = this.stringBatasBawahNilaiA;
+            instanceNilai.stringBatasNilaiB = this.stringBatasBawahNilaiB;
+            instanceNilai.stringBatasNilaiC = this.stringBatasBawahNilaiC;
+            instanceNilai.stringBatasNilaiD = this.stringBatasBawahNilaiD;
+
+            this.saveDataSetelanLocalStorage();
+          }
         }
       } else {
-        this.isInputDataOk = false;
-        this.pesanInputDataNotValid = 'Total nilai pengali harus berjumlah 100 persen';
+        this.showPesanErrorMasukan(false, 'Total persentase dari nilai tugas, nilai UTS, dan nilai UAS harus 100 %');
       }
     }
+  }
+
+  /**
+   * Cek apakah nilai batas bawah , sudah benar batasnya atau belum
+   * @param {number} batasA batas nilai A
+   * @param {number} batasB batas nilai B
+   * @param {number} batasC batas nilai C
+   * @param {number} batasD batas nilai D
+   * @return {boolean} nilai balikan berupa boolean benar atau salah
+   */
+  validasiBatasBawahOk(batasA: number, batasB: number, batasC: number, batasD: number): boolean {
+
+    let isBatasAValid = true;
+    let isBatasBValid = true;
+    let isBatasCValid = true;
+    let isBatasDValid = true;
+    this.isInputDataOk = true;
+
+    // batas bawah nilai A harus lebih besar dari nilai yang lainnya
+    if (batasA < batasB) {
+      isBatasAValid = false;
+    } else if (batasA < batasC) {
+      isBatasAValid = false;
+    } else if (batasA < batasD) {
+      isBatasAValid = false;
+    } else {
+      isBatasAValid = true;
+    }
+
+    if (!isBatasAValid) {
+      this.showPesanErrorMasukan(false, 'Batas bawah nilai A harus lebih tinggi dari batas bawah nilai B, C, dan D');
+    }
+
+    // batas bawah nilai B harus lebih kecil dari nilai A, tapi lebih besar dari batas nilai C dan D
+    if (batasB > batasA) {
+      isBatasBValid = false;
+      this.showPesanErrorMasukan(false, 'Batas bawah nilai B harus lebih kecil dari batas bawah nilai A');
+    } else if (batasB < batasC) {
+      isBatasBValid = false;
+      this.showPesanErrorMasukan(false, 'Batas bawah nilai B harus lebih besar dari batas bawah nilai C');
+    } else if (batasB < batasD) {
+      isBatasBValid = false;
+      this.showPesanErrorMasukan(false, 'Batas bawah nilai B harus lebih besar dari batas bawah nilai D');
+    } else {
+      isBatasBValid = true;
+    }
+
+    // batas bawah nilai C harus lebih kecil dari batas nilai A dan B, tapi lebih besar dari batas nilai D
+    if (batasC > batasA) {
+      isBatasCValid = false;
+      this.showPesanErrorMasukan(false, 'Batas bawah nilai C harus lebih kecil dari batas bawah nilai A');
+    } else if (batasC > batasB) {
+      isBatasCValid = false;
+      this.showPesanErrorMasukan(false, 'Batas bawah nilai C harus lebih kecil dari batas bawah nilai B');
+    } else if (batasC < batasD) {
+      isBatasCValid = false;
+      this.showPesanErrorMasukan(false, 'Batas bawah nilai C harus lebih besar dari batas bawah nilai D');
+    } else {
+      isBatasCValid = true;
+    }
+
+    // batas bawah nilai D harus lebih kecil dari semua batas nilai
+    if (batasD > batasA) {
+      isBatasDValid = false;
+    } else if (batasD > batasB) {
+      isBatasDValid = false;
+    } else if (batasD > batasC) {
+      isBatasDValid = false;
+    } else {
+      isBatasDValid = true;
+    }
+
+    if (!isBatasDValid) {
+      this.showPesanErrorMasukan(false, 'Batas bawah nilai D harus lebih kecil dari batas bawah nilai A, B, dan C');
+    }
+
+    console.log('inputan ok ' + this.isInputDataOk);
+    return isBatasAValid && isBatasBValid && isBatasCValid && isBatasDValid;
   }
 
   saveDataSetelanLocalStorage() {
@@ -184,6 +265,17 @@ export class SetelanKalkulatorComponent implements OnInit, OnDestroy {
   sendPesanBusRefreshData(kodepesan: number) {
 
     this.busService.sendBusDataSetelan(kodepesan);
+  }
+
+  /**
+   * Tampilkan pesan error masukan
+   * @param {boolean} isDataOk apakah data sudah benar atau belum
+   * @param {string} stringPesan
+   */
+  showPesanErrorMasukan(isDataOk: boolean, stringPesan: string) {
+
+    this.isInputDataOk = isDataOk;
+    this.pesanInputDataNotValid = stringPesan;
   }
 
   clickCloseDialog() {

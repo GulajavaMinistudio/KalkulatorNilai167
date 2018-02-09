@@ -36,7 +36,7 @@ export class ChromeBrowserGuardGuard implements CanActivate, CanActivateChild, C
       this.router.navigate([urlBrowser]);
     } else {
       // Navigasi ke halaman untuk download browser Google Chrome
-      this.router.navigate(['/tentang-aplikasi/lebih-lancar-pake-chrome']);
+      this.router.navigate(['/lebih-lancar-pake-chrome']);
     }
     return true;
   }
@@ -48,7 +48,7 @@ export class ChromeBrowserGuardGuard implements CanActivate, CanActivateChild, C
     if (!this.authBrowserService.isBrowserSupport) {
       // Store the attempted URL for redirecting
       this.authBrowserService.stringRedirectUrl = stringurl;
-      this.router.navigate(['/tentang-aplikasi/lebih-lancar-pake-chrome']);
+      this.router.navigate(['/lebih-lancar-pake-chrome']);
     }
     return true;
   }

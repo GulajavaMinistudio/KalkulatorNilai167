@@ -14,6 +14,10 @@ const appRoutingRoot: Routes = [
     path: 'tentang-aplikasi', loadChildren: 'app/tentang-app/tentang-app.module#TentangAppModule'
   },
   {
+    path: 'lebih-lancar-pake-chrome',
+    component: ChromeDownloadGuardComponent
+  },
+  {
     path: '', redirectTo: 'hitung-nilai', pathMatch: 'full'
   },
   {

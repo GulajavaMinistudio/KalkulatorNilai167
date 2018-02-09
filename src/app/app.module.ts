@@ -1,5 +1,5 @@
 import { ServiceWorkerModule } from '@angular/service-worker';
-import { environment} from '../environments/environment';
+import { environment } from '../environments/environment';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
@@ -9,16 +9,16 @@ import { FormsModule } from '@angular/forms';
 import { SharedsModuleModule } from './shareds-module/shareds-module.module';
 import { AppRoutingsModule } from './app-routings/app-routings.module';
 import { ChromeBrowserGuardGuard } from './app-routings/chrome-browser-guard.guard';
-import { HeaderMenubarComponent } from './shareds-module/header-menubar/header-menubar.component';
 import { CheckForUpdateService } from './worker-services/check-for-update.service';
 import { LogUpdateService } from './worker-services/log-update.service';
 import { PromptUpdateService } from './worker-services/prompt-update.service';
+import { ChromeDownloadGuardComponent } from './tentang-app/chrome-download-guard/chrome-download-guard.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    HeaderMenubarComponent
+    ChromeDownloadGuardComponent,
   ],
   imports: [
     BrowserModule,

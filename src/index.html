@@ -8,31 +8,33 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
   <link rel="manifest" href="manifest.json">
-  <meta name="theme-color" content="#009688"/>
+  <meta name="theme-color" content="#00B5AD"/>
 </head>
 <body>
-<app-root></app-root>
+<app-root>
+  <div style="height: 50px; background: #009688">
+  </div>
+</app-root>
 
 <!-- untuk memuat library css dan js secara async , aktifkan ketika akan membuat mode produksi -->
-<script type="text/javascript">
-  var asynCssSemantic = document.createElement('link');
-  asynCssSemantic.rel = 'stylesheet';
-  asynCssSemantic.href = 'https://cdn.jsdelivr.net/npm/semantic-ui@2.2.14/dist/semantic.min.css';
-  asynCssSemantic.type = 'text/css';
-  var deferCSS = document.getElementsByTagName('link')[0];
-  deferCSS.parentNode.insertBefore(asynCssSemantic, deferCSS);
+<!--<script type="text/javascript">-->
+  <!--var asynCssSemantic = document.createElement('link');-->
+  <!--asynCssSemantic.rel = 'stylesheet';-->
+  <!--asynCssSemantic.href = 'https://cdn.jsdelivr.net/npm/semantic-ui@2.2.14/dist/semantic.min.css';-->
+  <!--asynCssSemantic.type = 'text/css';-->
+  <!--var deferCSS = document.getElementsByTagName('link')[0];-->
+  <!--deferCSS.parentNode.insertBefore(asynCssSemantic, deferCSS);-->
 
-  var asynCssGoogleFont = document.createElement('link');
-  asynCssGoogleFont.rel = 'stylesheet';
-  asynCssGoogleFont.href = 'https://fonts.googleapis.com/icon?family=Material+Icons';
-  asynCssGoogleFont.type = 'text/css';
-  var deferCSSGoogleFont = document.getElementsByTagName('link')[0];
-  deferCSSGoogleFont.parentNode.insertBefore(asynCssGoogleFont, deferCSSGoogleFont);
-</script>
-<script async defer src="https://cdn.jsdelivr.net/combine/npm/jquery@3.3.1,npm/semantic-ui@2.2.14/dist/semantic.min.js"></script>
-<!--<script async defer src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>-->
-<!--<script async defer src="https://cdn.jsdelivr.net/npm/semantic-ui@2/dist/semantic.min.js"></script>-->
-<script async defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
+  <!--var asynCssGoogleFont = document.createElement('link');-->
+  <!--asynCssGoogleFont.rel = 'stylesheet';-->
+  <!--asynCssGoogleFont.href = 'https://fonts.googleapis.com/icon?family=Material+Icons';-->
+  <!--asynCssGoogleFont.type = 'text/css';-->
+  <!--var deferCSSGoogleFont = document.getElementsByTagName('link')[0];-->
+  <!--deferCSSGoogleFont.parentNode.insertBefore(asynCssGoogleFont, deferCSSGoogleFont);-->
+<!--</script>-->
+<!--<script defer-->
+        <!--src="https://cdn.jsdelivr.net/combine/npm/jquery@3.3.1,npm/semantic-ui@2.2.14/dist/semantic.min.js"></script>-->
+<!--<script async src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>-->
 
 <noscript>
   <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/icon?family=Material+Icons"/>
